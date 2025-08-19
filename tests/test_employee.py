@@ -25,7 +25,7 @@ class TestAddAndVerifyEmployees:
         self.login_page.login("Admin", "admin123")
 
         # 2) Navigate to PIM
-        self.db_page.mouseClickOnPim()
+        self.db_page.mouse_click_on_pim()
 
         # 3) Add multiple employees from Excel
         employees = read_employees(EXCEL_FILE, SHEET_NAME)  # list of tuples

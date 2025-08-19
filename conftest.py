@@ -14,7 +14,6 @@ def browser_setup():
     options.add_argument("--disable-notifications")
     options.add_argument("--no-sandbox")
 
-
     service = ChromeService(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
     driver.implicitly_wait(10)
@@ -24,7 +23,6 @@ def browser_setup():
 
 @pytest.fixture
 def setup(browser_setup):
-    """Function-level fixture for test setup"""
     driver = browser_setup
     driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
     return driver

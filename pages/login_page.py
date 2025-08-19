@@ -13,11 +13,11 @@ class LoginPage(BasePage):
 
         self.enter_text(self.USERNAME, username)
         self.enter_text(self.PASSWORD, password)
-        self.click(self.LOGIN_BTN)
+        self.click_element(self.LOGIN_BTN)
         print(f" Login attempted with user: {username}")
 
     def logout(self):
 
-        self.click(self.USER_DROPDOWN)
-        self.click(self.LOGOUT_LINK)
+        self.click_element(self.USER_DROPDOWN)
+        self.click_element(self.LOGOUT_LINK)
         print(" Logout successful")

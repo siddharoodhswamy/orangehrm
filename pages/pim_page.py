@@ -19,35 +19,34 @@ class PimPage(BasePage):
     SEARCH_BTN = (By.XPATH, "//button[normalize-space()='Search']")
     TABLE_ROWS = (By.XPATH, "//div[contains(@class,'oxd-table-body')]/div[@role='row']")
 
+    """Navigate to Add Employee tab"""
     def open_add_employee(self):
-        """Navigate to Add Employee tab"""
-        self.click(self.ADD_EMPLOYEE_TAB)
+        self.click_element(self.ADD_EMPLOYEE_TAB)
 
+    """Add a new employee"""
     def add_employee(self, first, middle, last, emp_id):
-        """Add a new employee"""
         self.open_add_employee()
         self.enter_text(self.FIRSTNAME, first)
         self.enter_text(self.MIDDLENAME, middle)
         self.enter_text(self.LASTNAME, last)
 
-        # OrangeHRM auto-fills emp id; clear then set
-        emp = self.visible(self.EMP_ID)
+        emp = self.wait_until_element_visible(self.EMP_ID)
         emp.clear()
         if emp_id:
             emp.send_keys(str(emp_id))
 
-        self.click(self.SAVE_BTN)
+        self.click_element(self.SAVE_BTN)
         print(f"Employee Added: {first} {last} ({emp_id})")
-        time.sleep(2)  # wait briefly for create to complete
+        time.sleep(2)
 
+    """Navigate to Employee List tab"""
     def open_employee_list(self):
-        """Navigate to Employee List tab"""
-        self.click(self.EMPLOYEE_LIST_TAB)
+        self.click_element(self.EMPLOYEE_LIST_TAB)
 
+    """Search for employee by name and return True if found"""
     def search_employee_by_name(self, full_name: str) -> bool:
-        """Search for employee by name and return True if found"""
         self.enter_text(self.EMP_NAME_FILTER, full_name)
-        self.click(self.SEARCH_BTN)
+        self.click_element(self.SEARCH_BTN)
         time.sleep(2)
 
         rows = self.driver.find_elements(*self.TABLE_ROWS)
